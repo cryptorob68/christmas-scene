@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Christmas AR Experience</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <!-- A-Frame and AR.js -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <a-scene
+        vr-mode-ui="enabled: false"
+        arjs='sourceType: webcam; debugUIEnabled: false; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;'
+        embedded>
+        
+        <!-- Define your Christmas characters here -->
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/santa.glb"
+            scale="1 1 1"
+            position="-4 0.1 1"
+            scale-on-distance="maxScale: 2; minScale: 0.5"
+            rotation="0 30 0">
+        </a-entity>
+
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/sleigh.glb"
+            scale="1.5 1.5 1.5"
+            position="4 0.1 1"
+            scale-on-distance="maxScale: 3; minScale: 1"
+            rotation="0 -30 0">
+        </a-entity>
+
+        <!-- Row 2 -->
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/elf-boy.glb"
+            scale="0.8 0.8 0.8"
+            position="-7 0.1 5"
+            scale-on-distance="maxScale: 1.5; minScale: 0.3"
+            rotation="0 45 0">
+        </a-entity>
+
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/elf-girl.glb"
+            scale="0.8 0.8 0.8"
+            position="7 0.1 5"
+            scale-on-distance="maxScale: 1.5; minScale: 0.3"
+            rotation="0 -45 0">
+        </a-entity>
+
+        <!-- Row 3 -->
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/grinch.glb"
+            scale="1 1 1"
+            position="-5 0.1 7"
+            scale-on-distance="maxScale: 2; minScale: 0.5"
+            rotation="0 30 0">
+        </a-entity>
+
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/mickey-2.glb"
+            scale="0.8 0.8 0.8"
+            position="0 0.1 7"
+            scale-on-distance="maxScale: 1.5; minScale: 0.3"
+            rotation="0 0 0">
+        </a-entity>
+
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/jack-frost.glb"
+            scale="1 1 1"
+            position="5 0.1 7"
+            scale-on-distance="maxScale: 2; minScale: 0.5"
+            rotation="0 -15 0">
+        </a-entity>
+
+        <!-- Row 4 -->
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/minion-1.glb"
+            scale="0.7 0.7 0.7"
+            position="-6 0.1 10"
+            scale-on-distance="maxScale: 1.2; minScale: 0.3"
+            rotation="0 0 0">
+        </a-entity>
+
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/presents-bag.glb"
+            scale="0.8 0.8 0.8"
+            position="0 0.1 10"
+            scale-on-distance="maxScale: 1.5; minScale: 0.4"
+            rotation="0 0 0">
+        </a-entity>
+
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/minion-2.glb"
+            scale="0.7 0.7 0.7"
+            position="6 0.1 10"
+            scale-on-distance="maxScale: 1.2; minScale: 0.3"
+            rotation="0 0 0">
+        </a-entity>
+
+        <!-- Row 5 -->
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/snowman.glb"
+            scale="1 1 1"
+            position="-4 0.1 13"
+            scale-on-distance="maxScale: 2; minScale: 0.5"
+            rotation="0 15 0">
+        </a-entity>
+
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            gltf-model="assets/models/stitch.glb"
+            scale="0.8 0.8 0.8"
+            position="4 0.1 13"
+            scale-on-distance="maxScale: 1.5; minScale: 0.4"
+            rotation="0 -15 0">
+        </a-entity>
+
+        <!-- Camera -->
+        <a-camera gps-camera rotation-reader></a-camera>
+    </a-scene>
+
+    <!-- Loading screen -->
+    <div id="loading">
+        <div class="loading-text">Loading Christmas Magic...</div>
+    </div>
+
+    <!-- Add this after the loading div -->
+    <div id="instructions" class="overlay">
+        <p>Point your camera at the yard to see the Christmas characters!</p>
+    </div>
+</body>
+</html> 
