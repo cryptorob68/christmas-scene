@@ -13,19 +13,26 @@
 <body>
     <a-scene
         vr-mode-ui="enabled: false"
-        arjs='sourceType: webcam; debugUIEnabled: false; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;'
+        arjs='sourceType: webcam; 
+              debugUIEnabled: true; 
+              sourceWidth:1280; 
+              sourceHeight:960; 
+              displayWidth: 1280; 
+              displayHeight: 960;
+              trackingMethod: best;
+              areaLearning: true;'
         embedded>
         
-        <!-- Single GPS anchor point for all models -->
+        <!-- Single GPS anchor point - adjusted to be in front -->
         <a-entity id="models-container"
-            gps-entity-place="latitude: 38.41802533198222; longitude: -121.47271463679319">
+            gps-entity-place="latitude: 38.41802933198222; longitude: -121.47271463679319">
             
             <!-- West side (negative X) to East side (positive X) -->
             <!-- Front Row (closest to street) -->
             <a-entity
                 gltf-model="assets/models/santa.glb"
                 scale="1 1 1"
-                position="-15 0.1 2"    <!-- West side -->
+                position="-5 0.1 -5"    <!-- Closer and more to the front -->
                 scale-on-distance="maxScale: 2; minScale: 0.5"
                 rotation="0 90 0">      <!-- Facing east -->
             </a-entity>
@@ -33,7 +40,7 @@
             <a-entity
                 gltf-model="assets/models/sleigh.glb"
                 scale="0.5 0.5 0.5"
-                position="15 0.1 2"     <!-- East side -->
+                position="5 0.1 -5"     <!-- Closer and more to the front -->
                 scale-on-distance="maxScale: 1.5; minScale: 0.25"
                 rotation="0 -90 0">     <!-- Facing west -->
             </a-entity>
@@ -81,4 +88,4 @@
         <p>Point your camera at the yard to see the Christmas characters!</p>
     </div>
 </body>
-</html>
+</html> 
