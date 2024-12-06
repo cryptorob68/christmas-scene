@@ -7,21 +7,21 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script>
         // Component to Play Sound on Tap
-        AFRAME.registerComponent('play-sound-on-tap', {
-            init: function () {
-                const el = this.el; // Reference to the entity
-                const sound = el.querySelector('a-sound'); // Get the sound component
+        AFRAME.registerComponent('play-sound-on-touch', {
+    init: function () {
+        const el = this.el; // Reference to the entity
+        const sound = el.querySelector('a-sound'); // Get the sound component
 
-                el.addEventListener('click', function () {
-                    if (sound) {
-                        console.log('Playing sound on tap...');
-                        sound.components.sound.playSound(); // Trigger sound playback
-                    } else {
-                        console.error('Sound component not found!');
-                    }
-                });
+        el.addEventListener('touchstart', function () {
+            if (sound) {
+                console.log('Playing sound on touchstart...');
+                sound.components.sound.playSound(); // Trigger sound playback
+            } else {
+                console.error('Sound component not found!');
             }
         });
+    }
+});
     </script>
 </head>
 <body>
