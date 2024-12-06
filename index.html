@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AR.js Interaction with Sound</title>
+    <title>A-Frame Sound Test</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script>
-        // Component to change color and play sound on click
-        AFRAME.registerComponent('change-color-on-click', {
-            schema: {
-                color: {type: 'color', default: 'yellow'}
-            },
+        AFRAME.registerComponent('play-sound-on-click', {
             init: function () {
                 var el = this.el;
-                var data = this.data;
-
+                var sound = el.querySelector('a-sound');
+                
                 el.addEventListener('click', function () {
-                    el.setAttribute('material', 'color', data.color); // Change color
-                    console.log('Shape clicked! Color changed to:', data.color);
-
-                    // Play sound manually
-                    var sound = el.querySelector('a-sound');
                     if (sound) {
                         console.log('Playing sound...');
                         sound.components.sound.playSound();
                     } else {
-                        console.error('No sound component found!');
+                        console.error('No sound component found.');
                     }
                 });
             }
@@ -34,25 +24,22 @@
     </script>
 </head>
 <body>
-    <a-scene
-        vr-mode-ui="enabled: false"
-        arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: true; handlePermissionsFallback: true;">
-        
-        <!-- Green Box with Interaction and Sound -->
+    <a-scene>
+        <!-- Interactive Box -->
         <a-entity
-    class="clickable"
-    geometry="primitive: box; height: 1; width: 1; depth: 1;"
-    material="color: green"
-    position="0 1.6 -3"
-    scale="1 1 1"
-    change-color-on-click="color: yellow">
-    <a-sound src="url('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3')" on="click"></a-sound>
+            class="clickable"
+            geometry="primitive: box; height: 1; width: 1; depth: 1;"
+            material="color: green"
+            position="0 1.6 -3"
+            scale="1 1 1"
+            play-sound-on-click>
+            
+            <!-- Sound Component -->
+            <a-sound src="url('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3')" autoplay="false"></a-sound>
         </a-entity>
 
-        <!-- Camera with Cursor -->
-        <a-camera position="0 1.6 0" camera="fov: 75" rotation-reader>
-            <a-cursor raycaster="objects: .clickable"></a-cursor>
-        </a-camera>
+        <!-- Camera -->
+        <a-camera position="0 1.6 0"></a-camera>
     </a-scene>
 </body>
 </html>
