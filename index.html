@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AR.js Local Test</title>
+    <title>AR.js Debug Test</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script>
+        AFRAME.registerComponent('log-position', {
+            tick: function () {
+                const position = this.el.getAttribute('position');
+                const scale = this.el.getAttribute('scale');
+                console.log(`Position: ${JSON.stringify(position)}, Scale: ${JSON.stringify(scale)}`);
+            }
+        });
+    </script>
 </head>
 <body>
     <a-scene
         vr-mode-ui="enabled: false"
         arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: true; handlePermissionsFallback: true;">
         
-        <!-- Green Box (No GPS) -->
+        <!-- Green Box -->
         <a-entity
-    geometry="primitive: box; height: 1; width: 1; depth: 1;"
-    material="color: green"
-    position="0 1 -3"
-    scale="1 1 1">
+            geometry="primitive: box; height: 1; width: 1; depth: 1;"
+            material="color: green"
+            position="0 1.6 -3"
+            scale="1 1 1"
+            log-position>
         </a-entity>
 
         <!-- Camera -->
-        <a-camera rotation-reader></a-camera>
+        <a-camera position="0 1.6 0" camera="fov: 75" rotation-reader></a-camera>
     </a-scene>
 </body>
 </html>
