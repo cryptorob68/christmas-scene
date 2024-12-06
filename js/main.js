@@ -1,25 +1,32 @@
 window.onload = () => {
-    // Hide loading screen
     const loading = document.querySelector('#loading');
-    document.querySelector('a-scene').addEventListener('loaded', () => {
+    const scene = document.querySelector('a-scene');
+
+    // Ensure the loading screen hides when the scene is fully loaded
+    scene.addEventListener('loaded', () => {
         loading.style.display = 'none';
     });
 
-    // Debugging positions
+    // Fallback in case the 'loaded' event doesn't fire properly
+    setTimeout(() => {
+        if (loading.style.display !== 'none') {
+            console.warn('Scene took too long to load. Hiding loading screen as fallback.');
+            loading.style.display = 'none';
+        }
+    }, 10000); // Fallback after 10 seconds
+
+    // Debugging positions (optional)
     const debugDiv = document.createElement('div');
     debugDiv.classList.add('debug-info');
     document.body.appendChild(debugDiv);
 
     function updateDebugInfo() {
         const gpsCamera = document.querySelector('[gps-camera]');
-        const anchor = document.querySelector('#grid-anchor');
-        if (gpsCamera && anchor) {
-            const cameraPos = gpsCamera.components['gps-camera'].currentCoords;
+        if (gpsCamera && gpsCamera.components['gps-camera']) {
+            const position = gpsCamera.components['gps-camera'].currentCoords || {};
             debugDiv.innerHTML = `
-                GPS Latitude: ${cameraPos.latitude}<br>
-                GPS Longitude: ${cameraPos.longitude}<br>
-                Anchor Latitude: 38.41802933198222<br>
-                Anchor Longitude: -121.47271463679319
+                GPS Latitude: ${position.latitude || 'unknown'}<br>
+                GPS Longitude: ${position.longitude || 'unknown'}
             `;
         }
     }
