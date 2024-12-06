@@ -3,10 +3,6 @@ body {
     overflow: hidden;
 }
 
-.a-enter-vr {
-    display: none;
-}
-
 #loading {
     position: fixed;
     top: 0;
