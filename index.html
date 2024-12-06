@@ -1,48 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Debug Sound Playback</title>
+    <title>Audio Playback Test</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script>
-        AFRAME.registerComponent('debug-sound', {
-            init: function () {
-                const el = this.el;
-                const sound = el.querySelector('a-sound');
+        document.addEventListener('DOMContentLoaded', () => {
+            const sound = new Audio('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3');
+            
+            // Add a button to trigger playback
+            const playButton = document.createElement('button');
+            playButton.textContent = "Play Sound";
+            document.body.appendChild(playButton);
 
-                if (sound) {
-                    console.log('Sound component found:', sound.getAttribute('src'));
-
-                    el.addEventListener('click', () => {
-                        console.log('Click event triggered on entity.');
-                        try {
-                            sound.components.sound.playSound();
-                            console.log('Sound playback triggered successfully.');
-                        } catch (err) {
-                            console.error('Error triggering sound playback:', err);
-                        }
-                    });
-                } else {
-                    console.error('No sound component found in entity.');
-                }
-            }
+            // Trigger playback on button click
+            playButton.addEventListener('click', () => {
+                console.log("Playing sound...");
+                sound.play().then(() => {
+                    console.log("Sound playback successful.");
+                }).catch((error) => {
+                    console.error("Error playing sound:", error);
+                });
+            });
         });
     </script>
 </head>
 <body>
-    <a-scene>
-        <!-- Interactive Box -->
-        <a-entity
-            geometry="primitive: box; height: 1; width: 1; depth: 1;"
-            material="color: yellow"
-            position="0 1.6 -3"
-            debug-sound>
-            
-            <!-- Corrected Sound Component -->
-            <a-sound src="https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3" autoplay="false"></a-sound>
-        </a-entity>
-
-        <!-- Camera -->
-        <a-camera position="0 1.6 0"></a-camera>
-    </a-scene>
+    <h1>Test Audio Playback</h1>
 </body>
 </html>
