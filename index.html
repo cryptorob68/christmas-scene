@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>A-Frame Test</title>
+    <title>AR.js Test</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
 <body>
-    <a-scene>
-        <!-- Simple 3D Box -->
-        <a-box position="0 1 -5" rotation="0 45 0" color="blue"></a-box>
-        <a-sphere position="2 1 -5" radius="0.5" color="red"></a-sphere>
-        <a-camera></a-camera>
+    <a-scene
+        vr-mode-ui="enabled: false"
+        arjs="sourceType: webcam; debugUIEnabled: true;">
+        
+        <!-- Simple Box at Fixed GPS Location -->
+        <a-entity
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            geometry="primitive: box; height: 1; width: 1; depth: 1;"
+            material="color: green">
+        </a-entity>
+
+        <a-camera gps-camera rotation-reader></a-camera>
     </a-scene>
 </body>
 </html>
