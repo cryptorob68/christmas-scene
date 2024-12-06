@@ -1,5 +1,5 @@
 window.onload = () => {
-    // Hide loading screen when everything is loaded
+    // Hide loading screen
     const loading = document.querySelector('#loading');
     document.querySelector('a-scene').addEventListener('loaded', () => {
         loading.style.display = 'none';
@@ -12,11 +12,14 @@ window.onload = () => {
 
     function updateDebugInfo() {
         const gpsCamera = document.querySelector('[gps-camera]');
-        if (gpsCamera) {
-            const position = gpsCamera.components['gps-camera'].currentCoords;
+        const anchor = document.querySelector('#grid-anchor');
+        if (gpsCamera && anchor) {
+            const cameraPos = gpsCamera.components['gps-camera'].currentCoords;
             debugDiv.innerHTML = `
-                GPS Latitude: ${position.latitude}<br>
-                GPS Longitude: ${position.longitude}
+                GPS Latitude: ${cameraPos.latitude}<br>
+                GPS Longitude: ${cameraPos.longitude}<br>
+                Anchor Latitude: 38.41802933198222<br>
+                Anchor Longitude: -121.47271463679319
             `;
         }
     }
