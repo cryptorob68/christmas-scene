@@ -2,44 +2,14 @@
 <html>
 <head>
     <title>A-Frame Sound Test</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script>
-        AFRAME.registerComponent('play-sound-on-click', {
-            init: function () {
-                var el = this.el;
-                var sound = el.querySelector('a-sound');
-                
-                el.addEventListener('click', function () {
-                    if (sound) {
-                        console.log('Playing sound...');
-                        sound.components.sound.playSound();
-                    } else {
-                        console.error('No sound component found.');
-                    }
-                });
-            }
-        });
-    </script>
 </head>
 <body>
     <a-scene>
-        <!-- Interactive Box -->
-        <a-entity
-            class="clickable"
-            geometry="primitive: box; height: 1; width: 1; depth: 1;"
-            material="color: green"
-            position="0 1.6 -3"
-            scale="1 1 1"
-            play-sound-on-click>
-            
-            <!-- Sound Component -->
-            <a-sound src="url('https://drive.google.com/file/d/1CAtzUiSnUymHGnhlhvqSM7mIdCzbFc8U/view?usp=sharing')" autoplay="false"></a-sound>
+        <!-- Sound Entity -->
+        <a-entity>
+            <a-sound src="url('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3')" autoplay="true"></a-sound>
         </a-entity>
-
-        <!-- Camera -->
-        <a-camera position="0 1.6 0"></a-camera>
     </a-scene>
 </body>
 </html>
