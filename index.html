@@ -39,6 +39,24 @@
             change-color-on-click="color: yellow">
         </a-entity>
 
+        <a-entity
+            class="clickable"
+            geometry="primitive: sphere; radius: 0.5;"
+            material="color: red"
+            position="-2 1.6 -3"
+            scale="1 1 1"
+            change-color-on-click="color: blue">
+        </a-entity>
+        
+        <a-entity
+            class="clickable"
+            geometry="primitive: cylinder; radius: 0.3; height: 1;"
+            material="color: blue"
+            position="2 1.6 -3"
+            scale="1 1 1"
+            change-color-on-click="color: green">
+        </a-entity>
+
         <!-- Camera with Cursor -->
         <a-camera position="0 1.6 0" camera="fov: 75" rotation-reader>
             <a-cursor raycaster="objects: .clickable"></a-cursor>
