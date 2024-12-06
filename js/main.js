@@ -1,5 +1,4 @@
 window.onload = () => {
-    const scene = document.querySelector('a-scene');
     const debugDiv = document.createElement('div');
     debugDiv.classList.add('debug-info');
     document.body.appendChild(debugDiv);
@@ -15,9 +14,6 @@ window.onload = () => {
                 <p>Anchor Latitude: 38.4007059834491</p>
                 <p>Anchor Longitude: -121.47344204937477</p>
             `;
-            console.log(
-                `Device GPS: Latitude ${coords.latitude}, Longitude ${coords.longitude}`
-            );
         } else {
             debugDiv.innerHTML = `<p>Waiting for GPS data...</p>`;
         }
