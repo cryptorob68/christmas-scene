@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Final Sound Test</title>
+    <title>Debug Sound Playback</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script>
-        AFRAME.registerComponent('play-sound-on-click', {
+        AFRAME.registerComponent('debug-sound', {
             init: function () {
                 const el = this.el;
                 const sound = el.querySelector('a-sound');
 
-                el.addEventListener('click', function () {
-                    if (sound) {
-                        console.log('Attempting to play sound...');
-                        sound.components.sound.playSound();
-                    } else {
-                        console.error('No sound component found!');
-                    }
-                });
+                // Check if sound component exists
+                if (sound) {
+                    console.log('Sound component found:', sound.getAttribute('src'));
+
+                    el.addEventListener('click', () => {
+                        console.log('Click event triggered on entity.');
+                        try {
+                            sound.components.sound.playSound();
+                            console.log('Sound playback triggered successfully.');
+                        } catch (err) {
+                            console.error('Error triggering sound playback:', err);
+                        }
+                    });
+                } else {
+                    console.error('No sound component found in entity.');
+                }
             }
         });
     </script>
 </head>
 <body>
     <a-scene>
+        <!-- Debugging Interactive Box -->
         <a-entity
             geometry="primitive: box; height: 1; width: 1; depth: 1;"
             material="color: green"
             position="0 1.6 -3"
-            play-sound-on-click>
+            debug-sound>
+            
+            <!-- Sound Component -->
             <a-sound
                 src="url('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3')"
                 autoplay="false">
             </a-sound>
         </a-entity>
-        <a-camera></a-camera>
+
+        <!-- Camera -->
+        <a-camera position="0 1.6 0"></a-camera>
     </a-scene>
 </body>
 </html>
