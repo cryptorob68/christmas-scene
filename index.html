@@ -10,40 +10,37 @@
     <script src="main.js"></script>
 </head>
 <body>
+    <!-- AR Scene -->
     <a-scene
         vr-mode-ui="enabled: false"
-        arjs="sourceType: webcam; debugUIEnabled: false; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;"
-        embedded>
+        arjs="sourceType: webcam; debugUIEnabled: false;">
         
-        <!-- Grid Anchor Point -->
-        <a-entity
-            id="grid-anchor"
-            gps-entity-place="latitude: 38.41802933198222; longitude: -121.47271463679319">
-        </a-entity>
+        <!-- Anchor Point -->
+        <a-entity gps-entity-place="latitude: 38.41802933198222; longitude: -121.47271463679319"></a-entity>
 
-        <!-- Characters Positioned in Grid -->
+        <!-- Characters -->
         <a-entity
-            gltf-model="assets/models/santa.glb"
-            position="-3.048 0 -3.048"  <!-- 10 feet left, 10 feet forward -->
-            scale="3 3 3">
-        </a-entity>
-
-        <a-entity
+            gps-entity-place="latitude: 38.41802933198222; longitude: -121.47271463679319"
             gltf-model="assets/models/sleigh.glb"
-            position="0 0 -3.048"  <!-- Centered, 10 feet forward -->
-            scale="2 2 2">
+            scale="2 2 2"
+            position="-3 0 0"
+            rotation="0 0 0">
         </a-entity>
 
         <a-entity
+            gps-entity-place="latitude: 38.41802933198222; longitude: -121.47271463679319"
+            gltf-model="assets/models/santa.glb"
+            scale="3 3 3"
+            position="0 0 0"
+            rotation="0 0 0">
+        </a-entity>
+
+        <a-entity
+            gps-entity-place="latitude: 38.41802933198222; longitude: -121.47271463679319"
             gltf-model="assets/models/elf-boy.glb"
-            position="3.048 0 -3.048"  <!-- 10 feet right, 10 feet forward -->
-            scale="2.5 2.5 2.5">
-        </a-entity>
-
-        <a-entity
-            gltf-model="assets/models/grinch.glb"
-            position="0 0 -6.096"  <!-- Centered, 20 feet forward -->
-            scale="3 3 3">
+            scale="2.5 2.5 2.5"
+            position="3 0 0"
+            rotation="0 0 0">
         </a-entity>
 
         <!-- Camera -->
