@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>A-Frame Sound Test</title>
+    <title>Manual Sound Test</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sound = document.querySelector('a-sound');
+            const playButton = document.querySelector('#play-button');
+
+            playButton.addEventListener('click', () => {
+                if (sound) {
+                    console.log('Attempting to play sound...');
+                    sound.components.sound.playSound();
+                } else {
+                    console.error('No sound component found.');
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <a-scene>
         <!-- Sound Entity -->
         <a-entity>
-            <a-sound src="url('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3')" autoplay="true"></a-sound>
+            <a-sound src="url('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3')" autoplay="false"></a-sound>
         </a-entity>
     </a-scene>
+
+    <!-- Play Button -->
+    <button id="play-button">Play Sound</button>
 </body>
 </html>
