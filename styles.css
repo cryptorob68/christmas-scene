@@ -46,15 +46,13 @@ body {
     padding: 10px;
     font-family: monospace;
     z-index: 9999;
+    border-radius: 4px;
+    line-height: 1.5;
 }
 
-@media screen and (orientation: landscape) {
-    .debug-info {
-        right: 10px;
-        left: auto;
-    }
-    
-    .overlay {
-        top: 10px;
+@media screen and (max-width: 480px) {
+    .overlay, .debug-info {
+        font-size: 12px;
+        padding: 5px 10px;
     }
 }
