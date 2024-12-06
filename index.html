@@ -7,7 +7,7 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script>
-        // Component to change color on click
+        // Component to change color on explicit interaction
         AFRAME.registerComponent('change-color-on-click', {
             schema: {
                 color: {type: 'color', default: 'yellow'}
@@ -16,9 +16,9 @@
                 var el = this.el; // Reference to the entity
                 var data = this.data; // Reference to the component's properties
 
-                el.addEventListener('click', function () {
+                el.addEventListener('mousedown', function () {
                     el.setAttribute('material', 'color', data.color); // Change color
-                    console.log('Clicked! Color changed to:', data.color);
+                    console.log('Shape clicked! Color changed to:', data.color);
                 });
             }
         });
@@ -29,8 +29,9 @@
         vr-mode-ui="enabled: false"
         arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: true; handlePermissionsFallback: true;">
         
-        <!-- Green Box with Click Interaction -->
+        <!-- Green Box with Interaction -->
         <a-entity
+            class="clickable"
             geometry="primitive: box; height: 1; width: 1; depth: 1;"
             material="color: green"
             position="0 1.6 -3"
@@ -40,7 +41,7 @@
 
         <!-- Camera with Cursor -->
         <a-camera position="0 1.6 0" camera="fov: 75" rotation-reader>
-            <a-cursor></a-cursor>
+            <a-cursor raycaster="objects: .clickable"></a-cursor>
         </a-camera>
     </a-scene>
 </body>
