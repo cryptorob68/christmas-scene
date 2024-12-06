@@ -9,7 +9,6 @@
                 const el = this.el;
                 const sound = el.querySelector('a-sound');
 
-                // Check if sound component exists
                 if (sound) {
                     console.log('Sound component found:', sound.getAttribute('src'));
 
@@ -31,18 +30,15 @@
 </head>
 <body>
     <a-scene>
-        <!-- Debugging Interactive Box -->
+        <!-- Interactive Box -->
         <a-entity
             geometry="primitive: box; height: 1; width: 1; depth: 1;"
             material="color: green"
             position="0 1.6 -3"
             debug-sound>
             
-            <!-- Sound Component -->
-            <a-sound
-                src="url('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3')"
-                autoplay="false">
-            </a-sound>
+            <!-- Corrected Sound Component -->
+            <a-sound src="https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3" autoplay="false"></a-sound>
         </a-entity>
 
         <!-- Camera -->
