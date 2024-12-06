@@ -28,8 +28,8 @@ window.onload = () => {
             debugDiv.innerHTML = `
                 Device Latitude: ${coords.latitude || 'N/A'}<br>
                 Device Longitude: ${coords.longitude || 'N/A'}<br>
-                Anchor Latitude: 38.41802933198222<br>
-                Anchor Longitude: -121.47271463679319
+                Anchor Latitude: 38.4007059834491<br>
+                Anchor Longitude: -121.47344204937477
             `;
             console.log(
                 `Device GPS: Latitude ${coords.latitude}, Longitude ${coords.longitude}`
