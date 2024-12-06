@@ -18,26 +18,34 @@
         <!-- Anchor Point for the Grid -->
         <a-entity gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"></a-entity>
 
+        <!-- Test Box to Verify GPS Functionality -->
+        <a-entity 
+            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
+            geometry="primitive: box; height: 1; width: 1; depth: 1;"
+            material="color: blue"
+            position="0 0 -10">
+        </a-entity>
+
         <!-- Characters Positioned in a Grid -->
         <a-entity
             gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
             gltf-model="assets/models/sleigh.glb"
             scale="2 2 2"
-            position="-4.5 0 0">
+            position="0 0 -5">
         </a-entity>
 
         <a-entity
             gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
             gltf-model="assets/models/santa.glb"
             scale="3 3 3"
-            position="0 0 0">
+            position="-5 0 -5">
         </a-entity>
 
         <a-entity
             gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
             gltf-model="assets/models/elf-boy.glb"
             scale="2.5 2.5 2.5"
-            position="4.5 0 0">
+            position="5 0 -5">
         </a-entity>
 
         <!-- Camera -->
