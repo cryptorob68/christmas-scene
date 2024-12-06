@@ -1,48 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Interactive Sound Playback</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Sound Test</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script>
-        // Component to Play Sound on Tap
-        AFRAME.registerComponent('play-sound-on-touch', {
-    init: function () {
-        const el = this.el; // Reference to the entity
-        const sound = el.querySelector('a-sound'); // Get the sound component
+        AFRAME.registerComponent('play-sound-on-click', {
+            init: function () {
+                const el = this.el;
+                const sound = el.querySelector('a-sound');
 
-        el.addEventListener('touchstart', function () {
-            if (sound) {
-                console.log('Playing sound on touchstart...');
-                sound.components.sound.playSound(); // Trigger sound playback
-            } else {
-                console.error('Sound component not found!');
+                el.addEventListener('click', function () {
+                    if (sound) {
+                        console.log('Attempting to play sound...');
+                        sound.components.sound.playSound();
+                    } else {
+                        console.error('No sound component found!');
+                    }
+                });
             }
         });
-    }
-});
     </script>
 </head>
 <body>
     <a-scene>
-        <!-- Interactive Box -->
         <a-entity
             geometry="primitive: box; height: 1; width: 1; depth: 1;"
-            material="color: yellow"
+            material="color: green"
             position="0 1.6 -3"
-            scale="1 1 1"
-            play-sound-on-tap>
-            
-            <!-- Sound Component -->
+            play-sound-on-click>
             <a-sound
                 src="url('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3')"
                 autoplay="false">
             </a-sound>
         </a-entity>
-
-        <!-- Camera -->
-        <a-camera position="0 1.6 0"></a-camera>
+        <a-camera></a-camera>
     </a-scene>
 </body>
 </html>
