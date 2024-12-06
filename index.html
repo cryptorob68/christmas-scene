@@ -1,58 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Christmas AR Experience</title>
+    <title>A-Frame Test</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <script src="main.js"></script>
 </head>
 <body>
-    <!-- AR Scene -->
-    <a-scene
-        vr-mode-ui="enabled: false"
-        arjs="sourceType: webcam; debugUIEnabled: false;">
-        
-        <!-- Anchor Point for the Grid -->
-        <a-entity gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"></a-entity>
-
-        <!-- Test Box to Verify GPS Functionality -->
-        <a-entity 
-            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
-            geometry="primitive: box; height: 1; width: 1; depth: 1;"
-            material="color: blue"
-            position="0 0 -10">
-        </a-entity>
-
-        <!-- Characters Positioned in a Grid -->
-        <a-entity
-            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
-            gltf-model="assets/models/sleigh.glb"
-            scale="2 2 2"
-            position="0 0 -5">
-        </a-entity>
-
-        <a-entity
-            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
-            gltf-model="assets/models/santa.glb"
-            scale="3 3 3"
-            position="-5 0 -5">
-        </a-entity>
-
-        <a-entity
-            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
-            gltf-model="assets/models/elf-boy.glb"
-            scale="2.5 2.5 2.5"
-            position="5 0 -5">
-        </a-entity>
-
-        <!-- Camera -->
-        <a-camera gps-camera rotation-reader></a-camera>
+    <a-scene>
+        <!-- Simple 3D Box -->
+        <a-box position="0 1 -5" rotation="0 45 0" color="blue"></a-box>
+        <a-sphere position="2 1 -5" radius="0.5" color="red"></a-sphere>
+        <a-camera></a-camera>
     </a-scene>
-
-    <!-- Debug Info -->
-    <div id="debug-info" class="debug-info"></div>
 </body>
 </html>
