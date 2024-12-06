@@ -1,23 +1,8 @@
 window.onload = () => {
-    const loading = document.querySelector('#loading');
     const scene = document.querySelector('a-scene');
     const debugDiv = document.createElement('div');
     debugDiv.classList.add('debug-info');
     document.body.appendChild(debugDiv);
-
-    // Ensure the loading screen disappears when the scene is ready
-    scene.addEventListener('loaded', () => {
-        console.log('Scene loaded successfully.');
-        loading.style.display = 'none';
-    });
-
-    // Fallback: Hide the loading screen if the event doesn't fire
-    setTimeout(() => {
-        if (loading.style.display !== 'none') {
-            console.warn('Fallback: Hiding the loading screen after 10 seconds.');
-            loading.style.display = 'none';
-        }
-    }, 10000);
 
     // Debugging GPS coordinates
     setInterval(() => {
