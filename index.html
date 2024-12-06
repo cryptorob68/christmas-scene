@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script>
-        // Custom Component to Play Sound on User Interaction
-        AFRAME.registerComponent('play-sound-on-click', {
+        // Component to Play Sound on Tap
+        AFRAME.registerComponent('play-sound-on-tap', {
             init: function () {
                 const el = this.el; // Reference to the entity
                 const sound = el.querySelector('a-sound'); // Get the sound component
 
                 el.addEventListener('click', function () {
                     if (sound) {
-                        console.log('Playing sound...');
+                        console.log('Playing sound on tap...');
                         sound.components.sound.playSound(); // Trigger sound playback
                     } else {
                         console.error('Sound component not found!');
@@ -26,13 +26,13 @@
 </head>
 <body>
     <a-scene>
-        <!-- Interactive Green Box -->
+        <!-- Interactive Box -->
         <a-entity
             geometry="primitive: box; height: 1; width: 1; depth: 1;"
             material="color: green"
             position="0 1.6 -3"
             scale="1 1 1"
-            play-sound-on-click>
+            play-sound-on-tap>
             
             <!-- Sound Component -->
             <a-sound
