@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AR.js Debug Test</title>
+    <title>AR.js Local Test</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
@@ -12,15 +12,15 @@
         vr-mode-ui="enabled: false"
         arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: true; handlePermissionsFallback: true;">
         
-        <!-- Test Object -->
+        <!-- Green Box (No GPS) -->
         <a-entity
-            gps-entity-place="latitude: 38.4007059834491; longitude: -121.47344204937477"
             geometry="primitive: box; height: 1; width: 1; depth: 1;"
-            material="color: green">
+            material="color: green"
+            position="0 0 -3">
         </a-entity>
 
         <!-- Camera -->
-        <a-camera gps-camera rotation-reader></a-camera>
+        <a-camera rotation-reader></a-camera>
     </a-scene>
 </body>
 </html>
