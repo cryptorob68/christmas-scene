@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AR.js Debug Test</title>
+    <title>AR.js Interaction Test</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script>
-        AFRAME.registerComponent('log-position', {
-            tick: function () {
-                const position = this.el.getAttribute('position');
-                const scale = this.el.getAttribute('scale');
-                console.log(`Position: ${JSON.stringify(position)}, Scale: ${JSON.stringify(scale)}`);
+        // Component to change color on click
+        AFRAME.registerComponent('change-color-on-click', {
+            schema: {
+                color: {type: 'color', default: 'yellow'}
+            },
+            init: function () {
+                var el = this.el; // Reference to the entity
+                var data = this.data; // Reference to the component's properties
+
+                el.addEventListener('click', function () {
+                    el.setAttribute('material', 'color', data.color); // Change color
+                    console.log('Clicked! Color changed to:', data.color);
+                });
             }
         });
     </script>
@@ -21,49 +29,19 @@
         vr-mode-ui="enabled: false"
         arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: true; handlePermissionsFallback: true;">
         
-        <!-- Green Box -->
+        <!-- Green Box with Click Interaction -->
         <a-entity
             geometry="primitive: box; height: 1; width: 1; depth: 1;"
             material="color: green"
             position="0 1.6 -3"
             scale="1 1 1"
-            log-position>
+            change-color-on-click="color: yellow">
         </a-entity>
 
-        <!-- Red Sphere -->
-        <a-entity
-            geometry="primitive: sphere; radius: 0.5;"
-            material="color: red"
-            position="-2 1.6 -3"
-            scale="1 1 1">
-        </a-entity>
-        
-        <!-- Blue Cylinder -->
-        <a-entity
-            geometry="primitive: cylinder; radius: 0.3; height: 1;"
-            material="color: blue"
-            position="2 1.6 -3"
-            scale="1 1 1">
-        </a-entity>
-
-        <a-entity
-            geometry="primitive: box; height: 1; width: 1; depth: 1;"
-            material="color: green"
-            position="0 1.6 -3"
-            scale="1 1 1"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 5000">
-        </a-entity>
-
-        <a-entity
-            geometry="primitive: box; height: 1; width: 1; depth: 1;"
-            material="color: green"
-            position="4 1.6 -3"
-            scale="1 1 1"
-            onclick="this.setAttribute('material', 'color', 'yellow')">
-        </a-entity>
-
-        <!-- Camera -->
-        <a-camera position="0 1.6 0" camera="fov: 75" rotation-reader></a-camera>
+        <!-- Camera with Cursor -->
+        <a-camera position="0 1.6 0" camera="fov: 75" rotation-reader>
+            <a-cursor></a-cursor>
+        </a-camera>
     </a-scene>
 </body>
 </html>
