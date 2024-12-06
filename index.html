@@ -1,33 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Manual Sound Test</title>
+    <title>Interactive Sound Playback</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sound = document.querySelector('a-sound');
-            const playButton = document.querySelector('#play-button');
+        // Custom Component to Play Sound on User Interaction
+        AFRAME.registerComponent('play-sound-on-click', {
+            init: function () {
+                const el = this.el; // Reference to the entity
+                const sound = el.querySelector('a-sound'); // Get the sound component
 
-            playButton.addEventListener('click', () => {
-                if (sound) {
-                    console.log('Attempting to play sound...');
-                    sound.components.sound.playSound();
-                } else {
-                    console.error('No sound component found.');
-                }
-            });
+                el.addEventListener('click', function () {
+                    if (sound) {
+                        console.log('Playing sound...');
+                        sound.components.sound.playSound(); // Trigger sound playback
+                    } else {
+                        console.error('Sound component not found!');
+                    }
+                });
+            }
         });
     </script>
 </head>
 <body>
     <a-scene>
-        <!-- Sound Entity -->
-        <a-entity>
-            <a-sound src="url('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3')" autoplay="false"></a-sound>
+        <!-- Interactive Green Box -->
+        <a-entity
+            geometry="primitive: box; height: 1; width: 1; depth: 1;"
+            material="color: green"
+            position="0 1.6 -3"
+            scale="1 1 1"
+            play-sound-on-click>
+            
+            <!-- Sound Component -->
+            <a-sound
+                src="url('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3')"
+                autoplay="false">
+            </a-sound>
         </a-entity>
-    </a-scene>
 
-    <!-- Play Button -->
-    <button id="play-button">Play Sound</button>
+        <!-- Camera -->
+        <a-camera position="0 1.6 0"></a-camera>
+    </a-scene>
 </body>
 </html>
