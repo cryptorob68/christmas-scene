@@ -30,6 +30,38 @@
             log-position>
         </a-entity>
 
+        <!-- Red Sphere -->
+        <a-entity
+            geometry="primitive: sphere; radius: 0.5;"
+            material="color: red"
+            position="-2 1.6 -3"
+            scale="1 1 1">
+        </a-entity>
+        
+        <!-- Blue Cylinder -->
+        <a-entity
+            geometry="primitive: cylinder; radius: 0.3; height: 1;"
+            material="color: blue"
+            position="2 1.6 -3"
+            scale="1 1 1">
+        </a-entity>
+
+        <a-entity
+            geometry="primitive: box; height: 1; width: 1; depth: 1;"
+            material="color: green"
+            position="0 1.6 -3"
+            scale="1 1 1"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 5000">
+        </a-entity>
+
+        <a-entity
+            geometry="primitive: box; height: 1; width: 1; depth: 1;"
+            material="color: green"
+            position="0 1.6 -3"
+            scale="1 1 1"
+            onclick="this.setAttribute('material', 'color', 'yellow')">
+        </a-entity>
+
         <!-- Camera -->
         <a-camera position="0 1.6 0" camera="fov: 75" rotation-reader></a-camera>
     </a-scene>
