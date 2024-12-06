@@ -1,8 +1,11 @@
 window.onload = () => {
     const loading = document.querySelector('#loading');
     const scene = document.querySelector('a-scene');
+    const debugDiv = document.createElement('div');
+    debugDiv.classList.add('debug-info');
+    document.body.appendChild(debugDiv);
 
-    // Ensure the loading screen disappears when the scene is fully loaded
+    // Ensure the loading screen disappears when the scene is ready
     scene.addEventListener('loaded', () => {
         console.log('Scene loaded successfully.');
         loading.style.display = 'none';
@@ -17,23 +20,21 @@ window.onload = () => {
     }, 10000);
 
     // Debugging GPS coordinates
-    const debugDiv = document.createElement('div');
-    debugDiv.classList.add('debug-info');
-    document.body.appendChild(debugDiv);
-
     setInterval(() => {
         const gpsCamera = document.querySelector('[gps-camera]');
         if (gpsCamera && gpsCamera.components['gps-camera']) {
             const coords = gpsCamera.components['gps-camera'].currentCoords || {};
             debugDiv.innerHTML = `
-                Device Latitude: ${coords.latitude || 'N/A'}<br>
-                Device Longitude: ${coords.longitude || 'N/A'}<br>
-                Anchor Latitude: 38.4007059834491<br>
-                Anchor Longitude: -121.47344204937477
+                <p>Device Latitude: ${coords.latitude || 'N/A'}</p>
+                <p>Device Longitude: ${coords.longitude || 'N/A'}</p>
+                <p>Anchor Latitude: 38.4007059834491</p>
+                <p>Anchor Longitude: -121.47344204937477</p>
             `;
             console.log(
                 `Device GPS: Latitude ${coords.latitude}, Longitude ${coords.longitude}`
             );
+        } else {
+            debugDiv.innerHTML = `<p>Waiting for GPS data...</p>`;
         }
     }, 1000);
 };
