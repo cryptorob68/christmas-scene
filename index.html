@@ -1,30 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Audio Playback Test</title>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sound = new Audio('https://cryptorob68.github.io/christmas-scene/assets/sounds/test.mp3');
-            
-            // Add a button to trigger playback
-            const playButton = document.createElement('button');
-            playButton.textContent = "Play Sound";
-            document.body.appendChild(playButton);
-
-            // Trigger playback on button click
-            playButton.addEventListener('click', () => {
-                console.log("Playing sound...");
-                sound.play().then(() => {
-                    console.log("Sound playback successful.");
-                }).catch((error) => {
-                    console.error("Error playing sound:", error);
-                });
-            });
-        });
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Christmas AR Scene</title>
+  
+  <!-- A-Frame Library -->
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  
+  <!-- AR.js for A-Frame (Marker-based AR) -->
+  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.3.2/aframe/build/aframe-ar.js"></script>
+  
+  <!-- A-Frame Particle System for Snow -->
+  <script src="https://unpkg.com/aframe-particle-system-component/dist/aframe-particle-system-component.min.js"></script>
+  
+  <style>
+    body, html {
+      margin: 0; 
+      padding: 0; 
+      overflow: hidden; 
+      font-family: sans-serif;
+    }
+    #instructions {
+      position: absolute; 
+      top: 10px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      color: white; 
+      background: rgba(0,0,0,0.5); 
+      padding: 10px; 
+      border-radius: 5px;
+      max-width: 90%;
+      text-align: center;
+      z-index: 9999;
+    }
+  </style>
 </head>
 <body>
-    <h1>Test Audio Playback</h1>
+  <div id="instructions">
+    1. Open this page on your phone by scanning the QR code.<br>
+    2. Allow camera access.<br>
+    3. Point your device at the printed AR marker.<br>
+    4. Tap Santa to hear "Ho Ho Ho"!
+  </div>
+  
+  <a-scene
+    embedded
+    vr-mode-ui="enabled: false"
+    arjs="sourceType: webcam; debugUIEnabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+    cursor="rayOrigin: mouse" >
+    
+    <!-- ASSETS: Preload models and audio -->
+    <a-assets>
+      <!-- 3D Models -->
+      <a-asset-item id="santaModel" src="assets/models/santa.glb"></a-asset-item>
+      <a-asset-item id="snowmanModel" src="assets/models/snowman.glb"></a-asset-item>
+      <a-asset-item id="sleighModel" src="assets/models/sleigh.glb"></a-asset-item>
+      
+      <!-- Audio -->
+      <audio id="hohoho" src="assets/sounds/test.mp3" preload="auto"></audio>
+    </a-assets>
+    
+    <!-- AR Marker (Replace with your own pattern file) -->
+    <a-marker type="pattern" patternUrl="assets/markers/pattern-marker.patt">
+      
+      <!-- Snow Particles Above the Scene -->
+      <a-entity
+        particle-system="preset: snow; particleCount: 2000; color: #FFFFFF; size: 0.1;"
+        position="0 2 -2">
+      </a-entity>
+      
+      <!-- Scale and position everything in meters. 
+           Yard is approx 9m wide by 4.5m deep. 
+           Assume marker at front center, facing the house.
+           
+           Z-axis: negative values go 'forward' from the marker
+           X-axis: negative is left, positive is right
+           Y-axis: up and down
+      -->
+
+      <!-- Santa in the center, about 4 meters forward -->
+      <a-entity
+        id="santa"
+        gltf-model="#santaModel"
+        position="0 0 -4"
+        scale="0.5 0.5 0.5">
+      </a-entity>
+
+      <!-- Snowman to the left side of yard (about 4m left, 3m forward) -->
+      <a-entity
+        gltf-model="#snowmanModel"
+        position="-4 0 -3"
+        scale="0.5 0.5 0.5">
+      </a-entity>
+
+      <!-- Sleigh to the right side of yard (about 4m right, 3m forward) -->
+      <a-entity
+        gltf-model="#sleighModel"
+        position="4 0 -3"
+        scale="0.5 0.5 0.5">
+      </a-entity>
+      
+      <!-- Add more models as desired using similar <a-entity> tags -->
+      
+    </a-marker>
+    
+    <a-entity camera></a-entity>
+  </a-scene>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const santa = document.querySelector('#santa');
+      const audio = document.querySelector('#hohoho');
+      
+      // Play audio on tap
+      santa.addEventListener('click', function() {
+        audio.play().catch(e => {
+          console.log('Audio play failed: ', e);
+          // On iOS devices, user may need an initial interaction before audio can play.
+        });
+      });
+    });
+  </script>
 </body>
 </html>
