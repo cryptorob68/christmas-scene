@@ -16,10 +16,11 @@
   
   <style>
     body, html {
-      margin: 0; 
-      padding: 0; 
-      overflow: hidden; 
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
       font-family: sans-serif;
+      background: #000;
     }
     #instructions {
       position: absolute; 
@@ -33,15 +34,16 @@
       max-width: 90%;
       text-align: center;
       z-index: 9999;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
   <div id="instructions">
-    1. Open this page on your phone by scanning the QR code.<br>
-    2. Allow camera access.<br>
-    3. Point your device at the printed AR marker.<br>
-    4. Tap Santa to hear "Ho Ho Ho"!
+    1. Open this page on your phone (via the QR code).<br>
+    2. Allow camera access if prompted.<br>
+    3. Point at the printed marker.<br>
+    4. Tap Santa to hear "Ho Ho Ho".
   </div>
   
   <a-scene
@@ -49,11 +51,11 @@
     vr-mode-ui="enabled: false"
     arjs="sourceType: webcam; debugUIEnabled: false;"
     renderer="logarithmicDepthBuffer: true;"
-    cursor="rayOrigin: mouse" >
-    
-    <!-- ASSETS: Preload models and audio -->
+    cursor="rayOrigin: mouse"
+  >
+    <!-- ASSETS: Models and Audio -->
     <a-assets>
-      <!-- 3D Models -->
+      <!-- Replace these file names with your own model files -->
       <a-asset-item id="santaModel" src="assets/models/santa.glb"></a-asset-item>
       <a-asset-item id="snowmanModel" src="assets/models/snowman.glb"></a-asset-item>
       <a-asset-item id="sleighModel" src="assets/models/sleigh.glb"></a-asset-item>
@@ -62,48 +64,36 @@
       <audio id="hohoho" src="assets/sounds/test.mp3" preload="auto"></audio>
     </a-assets>
     
-    <!-- AR Marker (Replace with your own pattern file) -->
-    <a-marker type="pattern" patternUrl="assets/markers/pattern-santa marker.patt">
-      
-      <!-- Snow Particles Above the Scene -->
+    <!-- Marker (Replace with your .patt file) -->
+    <a-marker type="pattern" patternUrl="assets/markers/pattern-santa-marker.patt">
+      <!-- Snow particles above the scene -->
       <a-entity
         particle-system="preset: snow; particleCount: 2000; color: #FFFFFF; size: 0.1;"
         position="0 2 -2">
       </a-entity>
       
-      <!-- Scale and position everything in meters. 
-           Yard is approx 9m wide by 4.5m deep. 
-           Assume marker at front center, facing the house.
-           
-           Z-axis: negative values go 'forward' from the marker
-           X-axis: negative is left, positive is right
-           Y-axis: up and down
-      -->
-
-      <!-- Santa in the center, about 4 meters forward -->
+      <!-- Position models relative to the marker -->
+      <!-- Santa in the center, forward a bit -->
       <a-entity
         id="santa"
         gltf-model="#santaModel"
         position="0 0 -4"
         scale="0.5 0.5 0.5">
       </a-entity>
-
-      <!-- Snowman to the left side of yard (about 4m left, 3m forward) -->
+      
+      <!-- Snowman to the left -->
       <a-entity
         gltf-model="#snowmanModel"
         position="-4 0 -3"
         scale="0.5 0.5 0.5">
       </a-entity>
-
-      <!-- Sleigh to the right side of yard (about 4m right, 3m forward) -->
+      
+      <!-- Sleigh to the right -->
       <a-entity
         gltf-model="#sleighModel"
         position="4 0 -3"
         scale="0.5 0.5 0.5">
       </a-entity>
-      
-      <!-- Add more models as desired using similar <a-entity> tags -->
-      
     </a-marker>
     
     <a-entity camera></a-entity>
@@ -114,11 +104,11 @@
       const santa = document.querySelector('#santa');
       const audio = document.querySelector('#hohoho');
       
-      // Play audio on tap
+      // Tap Santa to play audio
       santa.addEventListener('click', function() {
         audio.play().catch(e => {
           console.log('Audio play failed: ', e);
-          // On iOS devices, user may need an initial interaction before audio can play.
+          // On iOS, user interaction is required before audio can play.
         });
       });
     });
