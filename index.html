@@ -3,27 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minimal AR Test</title>
+  <title>Christmas AR Scene</title>
   
-  <!-- A-Frame -->
+  <!-- A-Frame Library -->
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   
-  <!-- AR.js (Try this known working CDN link) -->
-  <script src="https://unpkg.com/@ar-js-org/ar.js@3.3.2/aframe/build/aframe-ar.js"></script>
+  <!-- AR.js for A-Frame (Marker-based AR) -->
+  <!-- Using AR.js from the @ar-js-org namespace -->
+  <script src="https://unpkg.com/@ar-js-org/ar.js@3.4.5/aframe/build/aframe-ar.js"></script>
   
+  <!-- A-Frame Particle System for Snow -->
+  <script src="https://unpkg.com/aframe-particle-system-component/dist/aframe-particle-system-component.min.js"></script>
+  
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: sans-serif;
+      background: #000;
+    }
+    #instructions {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      background: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 90%;
+      text-align: center;
+      z-index: 9999;
+      font-size: 14px;
+    }
+  </style>
 </head>
-<body style="margin:0; overflow:hidden;">
+<body>
+  <div id="instructions">
+    1. Open this page on your phone (via the QR code).<br>
+    2. Ensure camera and motion/orientation access are allowed in Settings > Safari.<br>
+    3. Point at the printed marker.<br>
+    4. Tap Santa to hear "Ho Ho Ho".
+  </div>
+  
   <a-scene
     embedded
-    arjs="sourceType: webcam; debugUIEnabled: false;"
     vr-mode-ui="enabled: false"
+    arjs="sourceType: webcam; debugUIEnabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+    cursor="rayOrigin: mouse"
   >
-    <!-- Use the Hiro marker pattern -->
-    <a-marker type="pattern" patternUrl="https://ar-js-org.github.io/AR.js/data/patterns/hiro.patt">
-      <!-- A simple red box to test visibility -->
-      <a-box position="0 0.5 0" material="color: red;"></a-box>
+    <!-- Assets -->
+    <a-assets>
+      <a-asset-item id="santaModel" src="assets/models/santa.glb"></a-asset-item>
+      <a-asset-item id="snowmanModel" src="assets/models/snowman.glb"></a-asset-item>
+      <a-asset-item id="sleighModel" src="assets/models/sleigh.glb"></a-asset-item>
+      
+      <audio id="hohoho" src="assets/sounds/test.mp3" preload="auto"></audio>
+    </a-assets>
+    
+    <!-- Marker -->
+    <!-- Replace 'pattern-santa-marker.patt' with your actual .patt filename -->
+    <a-marker type="pattern" patternUrl="assets/markers/pattern-santa-marker.patt">
+      <!-- Snow particles above -->
+      <a-entity
+        particle-system="preset: snow; particleCount: 2000; color: #FFFFFF; size: 0.1;"
+        position="0 2 -2">
+      </a-entity>
+      
+      <!-- Models positioned around the marker -->
+      <a-entity
+        id="santa"
+        gltf-model="#santaModel"
+        position="0 0 -4"
+        scale="0.5 0.5 0.5">
+      </a-entity>
+      
+      <a-entity
+        gltf-model="#snowmanModel"
+        position="-4 0 -3"
+        scale="0.5 0.5 0.5">
+      </a-entity>
+      
+      <a-entity
+        gltf-model="#sleighModel"
+        position="4 0 -3"
+        scale="0.5 0.5 0.5">
+      </a-entity>
     </a-marker>
+    
     <a-entity camera></a-entity>
   </a-scene>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const santa = document.querySelector('#santa');
+      const audio = document.querySelector('#hohoho');
+      
+      // Tap Santa to play audio
+      santa.addEventListener('click', function() {
+        audio.play().catch(e => {
+          console.log('Audio play failed: ', e);
+          // On iOS, user interaction is required before audio can play.
+        });
+      });
+    });
+  </script>
 </body>
 </html>
